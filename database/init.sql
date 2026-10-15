@@ -38,8 +38,23 @@ CREATE TABLE IF NOT EXISTS Element (
         ON UPDATE CASCADE
 );
 
+-- Tabla Movements para registrar movimientos en los elementos (insercciones, actualizaciones y eliminaciones)
+CREATE TABLE IF NOT EXISTS Movements (
+    id CHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
+    Type VARCHAR(15) NOT NULL,
+    lastModification DATE,
+    newModification DATE NOT NULL,
+    elementId INT DEFAULT NULL,
+        CONSTRAINT fk_element_movement 
+        FOREIGN KEY (elementId) 
+        REFERENCES Element(id) 
+        ON DELETE SET NULL -- Para cuando se elimine un elemento de la base de datos, se guarde el movimiento, pero donde estaba la info de Element, sera remplazada por null
+        ON UPDATE CASCADE
+);
+
 INSERT INTO User (name, password, role, email) VALUES 
 ('Carlos Mendoza', 'Admin2026!', 'administrador', 'admin@gmail.com'),
+('David Velasquez', 'ing123', 'administrador', 'admin2@gmail.com'),  -- acceso ingeniero
 ('Ana López', 'Consult123!', 'consultor', 'consultor@gmail.com');
 
 -- Insertar Categorías
@@ -111,3 +126,64 @@ INSERT INTO Element (name, quantity, description, entryDate, img, categoryId) VA
 ('Sillón de Piel Sintética para Dirección', 6, 'Sillón ejecutivo elegante con acolchado de alta densidad', '2026-02-25', 'https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=500', 5),
 ('Silla de Comedor Apilable Nórdica', 28, 'Silla de diseño minimalista fácil de almacenar', '2026-03-02', 'https://images.unsplash.com/photo-1503602642458-232111445657?w=500', 5),
 ('Silla de Conferencia Fija Base Trineo', 16, 'Silla fija para visitantes o salas de espera', '2026-03-07', 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=500', 5);
+
+INSERT INTO Movements (Type, lastModification, newModification, elementId) VALUES
+-- Computadoras
+('INSERT', NULL, '2026-01-15', (SELECT id FROM Element WHERE name = 'MacBook Pro 16 M3 Pro' LIMIT 1)),
+('INSERT', NULL, '2026-01-20', (SELECT id FROM Element WHERE name = 'Dell XPS 15 9530' LIMIT 1)),
+('INSERT', NULL, '2026-02-01', (SELECT id FROM Element WHERE name = 'Lenovo ThinkPad X1 Carbon' LIMIT 1)),
+('INSERT', NULL, '2026-02-10', (SELECT id FROM Element WHERE name = 'Asus ROG Strix G16' LIMIT 1)),
+('INSERT', NULL, '2026-02-12', (SELECT id FROM Element WHERE name = 'HP Spectre x360' LIMIT 1)),
+('INSERT', NULL, '2026-02-18', (SELECT id FROM Element WHERE name = 'Acer Predator Helios 16' LIMIT 1)),
+('INSERT', NULL, '2026-02-22', (SELECT id FROM Element WHERE name = 'Apple iMac 24 M3' LIMIT 1)),
+('INSERT', NULL, '2026-03-01', (SELECT id FROM Element WHERE name = 'MSI Raider GE78' LIMIT 1)),
+('INSERT', NULL, '2026-03-05', (SELECT id FROM Element WHERE name = 'Microsoft Surface Laptop 6' LIMIT 1)),
+('INSERT', NULL, '2026-03-10', (SELECT id FROM Element WHERE name = 'PC Escritorio Gaming Custom i9' LIMIT 1)),
+
+-- Teléfonos
+('INSERT', NULL, '2026-01-10', (SELECT id FROM Element WHERE name = 'iPhone 15 Pro Max 256GB' LIMIT 1)),
+('INSERT', NULL, '2026-01-18', (SELECT id FROM Element WHERE name = 'Samsung Galaxy S24 Ultra' LIMIT 1)),
+('INSERT', NULL, '2026-01-25', (SELECT id FROM Element WHERE name = 'Google Pixel 8 Pro' LIMIT 1)),
+('INSERT', NULL, '2026-02-02', (SELECT id FROM Element WHERE name = 'Xiaomi 14 Ultra' LIMIT 1)),
+('INSERT', NULL, '2026-02-08', (SELECT id FROM Element WHERE name = 'OnePlus 12 5G' LIMIT 1)),
+('INSERT', NULL, '2026-02-15', (SELECT id FROM Element WHERE name = 'Motorola Edge 50 Ultra' LIMIT 1)),
+('INSERT', NULL, '2026-02-20', (SELECT id FROM Element WHERE name = 'Samsung Galaxy Z Fold 5' LIMIT 1)),
+('INSERT', NULL, '2026-02-28', (SELECT id FROM Element WHERE name = 'iPhone 14 128GB' LIMIT 1)),
+('INSERT', NULL, '2026-03-02', (SELECT id FROM Element WHERE name = 'Nothing Phone (2)' LIMIT 1)),
+('INSERT', NULL, '2026-03-08', (SELECT id FROM Element WHERE name = 'ASUS ROG Phone 8' LIMIT 1)),
+
+-- Mesas
+('INSERT', NULL, '2026-01-12', (SELECT id FROM Element WHERE name = 'Mesa de Escritorio Ejecutivo Roble' LIMIT 1)),
+('INSERT', NULL, '2026-01-22', (SELECT id FROM Element WHERE name = 'Mesa Gamer Altura Ajustable Elevable' LIMIT 1)),
+('INSERT', NULL, '2026-01-28', (SELECT id FROM Element WHERE name = 'Mesa de Comedor de Madera Parota 8 Sillas' LIMIT 1)),
+('INSERT', NULL, '2026-02-05', (SELECT id FROM Element WHERE name = 'Mesa Centro de Cristal Templado' LIMIT 1)),
+('INSERT', NULL, '2026-02-11', (SELECT id FROM Element WHERE name = 'Mesa Plegable de Jardín Rattan' LIMIT 1)),
+('INSERT', NULL, '2026-02-16', (SELECT id FROM Element WHERE name = 'Mesa de Conferencia Ovalada 12 Personas' LIMIT 1)),
+('INSERT', NULL, '2026-02-21', (SELECT id FROM Element WHERE name = 'Mesa Auxiliar Estilo Industrial Metal' LIMIT 1)),
+('INSERT', NULL, '2026-02-26', (SELECT id FROM Element WHERE name = 'Mesa L-Desk para Oficina Moderna' LIMIT 1)),
+('INSERT', NULL, '2026-03-04', (SELECT id FROM Element WHERE name = 'Mesa de Noche de Pino Minimalista' LIMIT 1)),
+('INSERT', NULL, '2026-03-09', (SELECT id FROM Element WHERE name = 'Mesa Plegable de Pared para Estudiar' LIMIT 1)),
+
+-- Periféricos
+('INSERT', NULL, '2026-01-14', (SELECT id FROM Element WHERE name = 'Teclado Mecánico Logitech G Pro X' LIMIT 1)),
+('INSERT', NULL, '2026-01-19', (SELECT id FROM Element WHERE name = 'Mouse Inalámbrico Razer DeathAdder V3 Pro' LIMIT 1)),
+('INSERT', NULL, '2026-01-26', (SELECT id FROM Element WHERE name = 'Monitor Gamer Asus ROG Swift 27 240Hz' LIMIT 1)),
+('INSERT', NULL, '2026-02-03', (SELECT id FROM Element WHERE name = 'Audífonos HyperX Cloud Alpha Wireless' LIMIT 1)),
+('INSERT', NULL, '2026-02-09', (SELECT id FROM Element WHERE name = 'Micrófono USB Elgato Wave:3' LIMIT 1)),
+('INSERT', NULL, '2026-02-14', (SELECT id FROM Element WHERE name = 'Cámara Web Logitech Brio 4K' LIMIT 1)),
+('INSERT', NULL, '2026-02-22', (SELECT id FROM Element WHERE name = 'Stream Deck Elgato MK.2 15 Teclas' LIMIT 1)),
+('INSERT', NULL, '2026-02-27', (SELECT id FROM Element WHERE name = 'Alfombrilla XL Corsair MM300 PRO' LIMIT 1)),
+('INSERT', NULL, '2026-03-03', (SELECT id FROM Element WHERE name = 'Bocinas de Escritorio Bose Companion 2' LIMIT 1)),
+('INSERT', NULL, '2026-03-08', (SELECT id FROM Element WHERE name = 'Hub USB-C Satechi 9 en 1' LIMIT 1)),
+
+-- Sillas
+('INSERT', NULL, '2026-01-11', (SELECT id FROM Element WHERE name = 'Silla ergonómica Herman Miller Aeron' LIMIT 1)),
+('INSERT', NULL, '2026-01-17', (SELECT id FROM Element WHERE name = 'Silla Gamer Secretlab Titan EVO 2024' LIMIT 1)),
+('INSERT', NULL, '2026-01-24', (SELECT id FROM Element WHERE name = 'Silla de Oficina Ejecutiva Malla Transpirable' LIMIT 1)),
+('INSERT', NULL, '2026-02-01', (SELECT id FROM Element WHERE name = 'Silla Gamer Corsair T3 Rush' LIMIT 1)),
+('INSERT', NULL, '2026-02-07', (SELECT id FROM Element WHERE name = 'Silla Ergonómica Autonomous ErgoChair Pro' LIMIT 1)),
+('INSERT', NULL, '2026-02-13', (SELECT id FROM Element WHERE name = 'Silla Operativa Básica con Ruedas' LIMIT 1)),
+('INSERT', NULL, '2026-02-19', (SELECT id FROM Element WHERE name = 'Silla Reclinable con Reposapiés para Gamer' LIMIT 1)),
+('INSERT', NULL, '2026-02-25', (SELECT id FROM Element WHERE name = 'Sillón de Piel Sintética para Dirección' LIMIT 1)),
+('INSERT', NULL, '2026-03-02', (SELECT id FROM Element WHERE name = 'Silla de Comedor Apilable Nórdica' LIMIT 1)),
+('INSERT', NULL, '2026-03-07', (SELECT id FROM Element WHERE name = 'Silla de Conferencia Fija Base Trineo' LIMIT 1));
