@@ -1,0 +1,54 @@
+<section class="element-detailBody">
+  <div class="element-detail">
+    <!-- Columna izquierda: Galería de imágenes -->
+    <div class="element-gallery">
+      <div class="main-image-container">
+        @if (previewURL()) {
+          <img class="main-image" [src]="previewURL()!" alt="vista Previa" />
+        }
+      </div>
+      <input class="fileInput" type="file" accept="image/*" (change)="previewFile($event)" />
+    </div>
+
+    <!-- Columna derecha: Información del producto -->
+    <div class="element-info">
+      <div class="form">
+        <label for="name" class="labelSpace">Nombre: </label>
+        <input type="text" id="name" class="editSpace" [formControl]="nameCTLR" />
+
+        <label for="category" class="labelSpace">Categoría: </label>
+        <select name="category" id="category" class="editSpace" [formControl]="categoryCTLR">
+          <option value="Computadora">Computadora</option>
+          <option value="Teléfono">Teléfono</option>
+          <option value="Mesa">Mesa</option>
+          <option value="Periféricos">Periférico</option>
+          <option value="Sillas">Sillas</option>
+        </select>
+
+        <label for="Type" class="labelSpace">Tipo:</label>
+        <select name="category" id="category" class="editSpace" [formControl]="typeCTLR">
+          <option value="Electrónico">Electrónico</option>
+          <option value="Mueble">Mueble</option>
+        </select>
+
+        <label for="quantity" class="labelSpace">Cantidad: </label>
+        <input type="number" id="quantity" class="editSpace" [formControl]="quantityCTLR" />
+
+        <label for="description" class="labelSpace">Descripción: </label>
+        <textarea
+          name="description"
+          id="description"
+          class="editSpaceArea"
+          [formControl]="descriptionCTLR"
+        ></textarea>
+      </div>
+
+      <ul>
+        <li>
+          <button type="button" class="btn-insert" (click)="insertElement()">Insertar</button>
+        </li>
+        <li><button type="button" class="btn-return" (click)="returnHome()">Regresar</button></li>
+      </ul>
+    </div>
+  </div>
+</section>

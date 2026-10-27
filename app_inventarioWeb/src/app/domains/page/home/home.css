@@ -1,0 +1,243 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+}
+
+.main {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.main.sleep {
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Fondo semitransparente que cubre toda la pantalla */
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+/* Modal/Tarjeta de ingreso de datos adaptables */
+.container-add {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 120px 1fr; /* 120px para la etiqueta, el resto para el input */
+  align-items: center;
+  gap: 1.5rem;
+}
+.title-card {
+  font-size: larger;
+  font-weight: bold;
+}
+.form-group label {
+  text-align: right;
+  font-style: italic;
+  color: #777777;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #767676;
+  border-radius: 2px;
+  font-size: 0.95rem;
+  color: #000000;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #3b8dff;
+  box-shadow: 0 0 0 1px #3b8dff;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.options-section-right {
+  position: absolute;
+  right: 0;
+}
+
+.options-section-left {
+  position: absolute;
+  left: 0;
+}
+.options {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 1rem;
+  margin-right: 1.5rem;
+}
+
+.options li button {
+  text-decoration: none;
+}
+
+.logout {
+  width: 7rem;
+  background-color: red;
+  padding: 0.6rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.add {
+  width: 13rem;
+  background-color: rgb(59, 141, 255);
+  padding: 0.6rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.add-left {
+  width: 8rem;
+  background-color: rgb(59, 141, 255);
+  margin-left: 1rem;
+  padding: 0.6rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.add-left:hover {
+  background-color: rgb(87, 157, 255);
+  color: white;
+}
+.logout:hover {
+  background-color: rgb(255, 82, 82);
+  color: white;
+}
+
+.add:hover {
+  background-color: rgb(87, 157, 255);
+  color: white;
+}
+
+.Categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 15px;
+}
+
+h2 {
+  margin: 10px 0px;
+}
+
+.CategoriesList {
+  margin: 10px 15px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 10px;
+}
+
+.CategoriesList li button {
+  text-decoration: none;
+  gap: 5px;
+}
+
+/* Estilos del Botón Secundario */
+.btn-secondary {
+  display: inline-block;
+  background-color: rgb(187, 187, 187);
+  color: black;
+  /* border: 1px solid black; */
+  border: none;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  padding: 0.625rem 1rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+/* Hover */
+.btn-secondary:hover {
+  background-color: rgb(87, 157, 255);
+  color: black;
+}
+
+/* Focus */
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(209, 213, 219, 0.5); /* focus:ring-4 */
+}
+
+.btn-secondary.selected {
+  background-color: rgb(59, 141, 255);
+}
+
+.BookList {
+  width: 100%;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.ListContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; /* Espacio opcional entre elementos */
+}

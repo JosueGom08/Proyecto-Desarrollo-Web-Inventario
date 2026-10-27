@@ -1,0 +1,48 @@
+/* loading */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Contenedor del Loader */
+.loader-container {
+  /* width: 12rem; Ancho predeterminado (192px) */
+  /* height: 12rem; Alto predeterminado (192px) */
+  height: 98vh;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Icono Animado */
+.spinner-icon {
+  width: 2rem; /* 32px */
+  height: 2rem; /* 32px */
+  color: var(--spinner-track);
+  animation: spin 1s linear infinite;
+}
+
+.spinner-fill {
+  color: #2563eb;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,154 @@
+@if (elementService.isLoadingHome() === false) {
+  <section class="main" [class.sleep]="isAddingElement()">
+    <div class="options-section-right">
+      <ul class="options">
+        @if (userService.isAdministrator()) {
+          <li>
+            <button class="add" (click)="isAddingElement.set(true)">
+              <strong>Ingresar Producto Existente</strong>
+            </button>
+          </li>
+          <li>
+            <button class="add" (click)="addElement()">
+              <strong>Ingresar Producto Nuevo</strong>
+            </button>
+          </li>
+        }
+        <li>
+          <button class="logout" (click)="logout()"><strong>Regresar</strong></button>
+        </li>
+      </ul>
+    </div>
+    <div class="options-section-left">
+      <ul>
+        <li>
+          <button class="add-left" routerLink="/history"><strong>Historial</strong></button>
+        </li>
+      </ul>
+    </div>
+    <div class="MainBody">
+      <div class="Categories">
+        <h2>Filtro por Categoria</h2>
+        <section>
+          <ul class="CategoriesList">
+            <li>
+              <button
+                href=""
+                class="btn-secondary"
+                (click)="setFilter($event)"
+                [class.selected]="filter() === 'Todos'"
+              >
+                Todos
+              </button>
+            </li>
+            <li>
+              <button
+                href=""
+                class="btn-secondary"
+                [class.selected]=""
+                (click)="setFilter($event)"
+                [class.selected]="filter() === 'Computadora'"
+              >
+                Computadora
+              </button>
+            </li>
+            <li>
+              <button
+                href=""
+                class="btn-secondary"
+                [class.selected]=""
+                (click)="setFilter($event)"
+                [class.selected]="filter() === 'Teléfono'"
+              >
+                Teléfono
+              </button>
+            </li>
+            <li>
+              <button
+                href=""
+                class="btn-secondary"
+                [class.selected]=""
+                (click)="setFilter($event)"
+                [class.selected]="filter() === 'Mesa'"
+              >
+                Mesa
+              </button>
+            </li>
+            <li>
+              <button
+                href=""
+                class="btn-secondary"
+                [class.selected]=""
+                (click)="setFilter($event)"
+                [class.selected]="filter() === 'Periféricos'"
+              >
+                Periféricos
+              </button>
+            </li>
+            <li>
+              <button
+                href=""
+                class="btn-secondary"
+                [class.selected]=""
+                (click)="setFilter($event)"
+                [class.selected]="filter() === 'Sillas'"
+              >
+                Sillas
+              </button>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <section class="BookList">
+        <div class="ListContainer">
+          @for (element of filterSelector(); track $index) {
+            <app-card-element [element]="element" />
+          }
+        </div>
+      </section>
+    </div>
+  </section>
+  @if (isAddingElement()) {
+    <div class="container" (click)="isAddingElement.set(false)">
+      <section class="container-add" (click)="$event.stopPropagation()">
+        <h1 class="title-card">Menú de ingreso de Elementos</h1>
+
+        <form class="form-grid">
+          <div class="form-group">
+            <label for="cantidad">ID Elemento:</label>
+            <input
+              id="cantidad"
+              type="number"
+              placeholder="Valor Númerico ej. 10,30,2"
+              [formControl]="idCTRL"
+            />
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad a Agregar:</label>
+            <input
+              id="cantidad"
+              type="number"
+              placeholder="Cantidad Númerica ej. 1,10,20"
+              [formControl]="quantityCTRL"
+            />
+          </div>
+
+          <ul class="modal-actions">
+            <li>
+              <button type="button" class="add" (click)="addElementQuantity()">
+                <strong>Agregar</strong>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="logout" (click)="isAddingElement.set(false)">
+                <strong>Regresar</strong>
+              </button>
+            </li>
+          </ul>
+        </form>
+      </section>
+    </div>
+  }
+} @else {
+  <app-login />
+}

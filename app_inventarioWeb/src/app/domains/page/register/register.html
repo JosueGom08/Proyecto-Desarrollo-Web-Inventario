@@ -1,0 +1,52 @@
+<div class="contactBody">
+  <section class="return">
+    <a (click)="ReturnLogin()">Regresar</a>
+  </section>
+  <h1>Registrate</h1>
+  <form class="floating-form">
+    <!-- Email -->
+    <div class="form-group">
+      <input
+        type="email"
+        [formControl]="emailCtlr"
+        name="floating_email"
+        id="floating_email"
+        class="form-input"
+        placeholder=" "
+        required
+      />
+      <label for="floating_email" class="form-label">Direción Correo Electrónico</label>
+    </div>
+
+    <!-- Filas dobles (First name & Last name) -->
+    <div class="form-row">
+      <div class="form-group">
+        <input
+          type="text"
+          [formControl]="nameCtlr"
+          name="floating_first_name"
+          id="floating_first_name"
+          class="form-input"
+          placeholder=" "
+          required
+        />
+        <label for="floating_first_name" class="form-label">Nombre de Usuario</label>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          [formControl]="passwordCtlr"
+          name="floating_last_name"
+          id="floating_last_name"
+          class="form-input"
+          placeholder=" "
+          required
+        />
+        <label for="floating_last_name" class="form-label">Contraseña</label>
+      </div>
+    </div>
+
+    <!-- Botón de registro -->
+    <button type="submit" (click)="registerUser($event)" class="btn-submit">Registrar</button>
+  </form>
+</div>

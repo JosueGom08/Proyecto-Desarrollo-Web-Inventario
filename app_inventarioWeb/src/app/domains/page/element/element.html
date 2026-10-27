@@ -1,0 +1,138 @@
+@if (editMode() === false) {
+  <section class="element-detailBody">
+    <div class="element-detail">
+      <!-- Columna izquierda: Galería de imágenes -->
+      <div class="element-gallery">
+        <div class="main-image-container">
+          <img class="main-image" [src]="element()?.img" [alt]="element()?.name" />
+        </div>
+      </div>
+
+      <!-- Columna derecha: Información del producto -->
+      <div class="element-info">
+        <h1 class="element-name">{{ element()?.name }}</h1>
+        <ul class="type">
+          <li>
+            <p class="element-info">{{ element()?.category }}</p>
+          </li>
+          <li>
+            <p class="element-info">{{ element()?.type }}</p>
+          </li>
+        </ul>
+        <p class="element-quantity">Cantidad: {{ element()?.quantity }}</p>
+        <p class="element-description">{{ element()?.description }}.</p>
+        <p class="element-date">Fecha de entrada: {{ date() }}</p>
+
+        <ul>
+          @if (userService.isAdministrator()) {
+            <li>
+              <button type="button" class="btn-update" (click)="changeUpdateMode()">
+                Actualizar
+              </button>
+            </li>
+            <li>
+              <button type="button" class="btn-delete" (click)="deleteElement()">Eliminar</button>
+            </li>
+            <li>
+              <button type="button" class="btn-delete" (click)="changeEliminateEvent()">
+                Disminuir Cantidad
+              </button>
+            </li>
+          }
+          <li><button type="button" class="btn-return" (click)="returnHome()">Regresar</button></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  @if (isDeletingElement()) {
+    <div class="container" (click)="isDeletingElement.set(false)">
+      <section class="container-add" (click)="$event.stopPropagation()">
+        <h1 class="title-card">Menú de ingreso de Elementos</h1>
+
+        <form class="form-grid">
+          <div class="form-group">
+            <label for="cantidad">Cantidad a Eliminar:</label>
+            <input
+              id="cantidad"
+              type="number"
+              placeholder="Cantidad Númerica ej. 1,10,20"
+              [formControl]="quantityEliminate"
+            />
+          </div>
+
+          <ul class="modal-actions">
+            <li>
+              <button type="button" class="add" (click)="updateElementQuantity()">
+                <strong>Eliminar</strong>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="logout" (click)="isDeletingElement.set(false)">
+                <strong>Regresar</strong>
+              </button>
+            </li>
+          </ul>
+        </form>
+      </section>
+    </div>
+  }
+} @else {
+  <section class="element-detailBody">
+    <div class="element-detail">
+      <!-- Columna izquierda: Galería de imágenes -->
+      <div class="element-gallery">
+        <div class="main-image-container">
+          <img class="main-image" [src]="element()?.img" [alt]="element()?.name" />
+        </div>
+      </div>
+
+      <!-- Columna derecha: Información del producto -->
+      <div class="element-info">
+        <div class="form">
+          <label for="name" class="labelSpace">Nombre: </label>
+          <input type="text" id="name" class="editSpace" [formControl]="nameCTLR" />
+
+          <label for="category" class="labelSpace">Categoría: </label>
+          <select name="category" id="category" class="editSpace" [formControl]="categoryCTLR">
+            <option value="Computadora">Computadora</option>
+            <option value="Teléfono">Teléfono</option>
+            <option value="Mesa">Mesa</option>
+            <option value="Periféricos">Periférico</option>
+            <option value="Sillas">Sillas</option>
+          </select>
+
+          <label for="quantity" class="labelSpace">Cantidad: </label>
+          <input type="number" id="quantity" class="editSpace" [formControl]="quantityCTLR" />
+
+          <label for="description" class="labelSpace">Descripción: </label>
+          <textarea
+            name="description"
+            id="description"
+            class="editSpaceArea"
+            [formControl]="descriptionCTLR"
+          ></textarea>
+
+          <label for="Type" class="labelSpace">Tipo: {{ element()?.type }}</label>
+          <p class="element-date">Fecha de entrada: {{ date() }}</p>
+        </div>
+
+        <ul>
+          <li>
+            <button type="button" class="btn-update" (click)="updateElement()">Actualizar</button>
+          </li>
+          <li>
+            <button type="button" class="btn-delete" [class.sleep]="editMode() === true">
+              Eliminar
+            </button>
+          </li>
+          <li>
+            <button type="button" class="btn-delete" [class.sleep]="editMode() === true">
+              Disminuir Cantidad
+            </button>
+          </li>
+          <li><button type="button" class="btn-return" (click)="showElement()">Ver</button></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+}

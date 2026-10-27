@@ -1,0 +1,141 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+}
+
+.contactBody {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Contenedor del Formulario */
+.floating-form {
+  max-width: 32rem; /* max-w-md (448px) */
+  padding: 1rem 1rem;
+  border: 0.2rem solid rgb(188, 188, 188);
+  border-radius: 0.8rem;
+}
+
+/* Grid de 2 columnas para campos dobles */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem; /* md:gap-6 */
+}
+
+/* Grupo del Input Flotante */
+.form-group {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  margin-bottom: 1.25rem; /* mb-5 */
+}
+
+/* Estilo del Input */
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 0.625rem 0; /* py-2.5 px-0 */
+  font-size: 0.875rem; /* text-sm */
+  color: #111827;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid #d1d5db;
+  appearance: none;
+  outline: none;
+}
+
+/* Estilo por defecto del Label (Posición Flotante Arriba) */
+.form-label {
+  position: absolute;
+  top: 0.75rem; /* top-3 */
+  left: 0;
+  z-index: -10;
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280;
+  transform-origin: 0 0;
+  transform: translateY(-1.5rem) scale(0.75); /* -translate-y-6 scale-75 */
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Cuando el input TIENE un placeholder visible (está vacío y no tiene foco),
+   el label baja al centro del input */
+.form-input:placeholder-shown + .form-label {
+  transform: translateY(0) scale(1);
+}
+
+/* Cuando el input recibe FOCO (focus), el label sube y cambia de color */
+.form-input:focus {
+  border-bottom-color: #2563eb;
+}
+
+.form-input:focus + .form-label {
+  transform: translateY(-1.5rem) scale(0.75);
+  color: #2563eb;
+}
+
+/* Botón de Envío */
+.btn-submit {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem; /* leading-5 */
+  padding: 0.625rem 1rem; /* py-2.5 px-4 */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn-submit:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-submit:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+}
+
+.return {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  padding: 0.8rem;
+  background-color: rgb(76, 76, 175);
+  border-radius: 0.9rem;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.return:hover {
+  background-color: #1d4ed8;
+}
+
+.return a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: box-shadow 0.15s ease;
+  cursor: pointer;
+}

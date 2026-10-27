@@ -1,0 +1,80 @@
+<div class="log-container">
+  <!-- Encabezado con título y botón en la esquina superior derecha -->
+  <div class="log-header">
+    <h2>Historial</h2>
+    <button class="btn-regresar" routerLink="/home"><Strong>Regresar</Strong></button>
+  </div>
+
+  <!-- Contenedor de la tabla -->
+  <div class="table-wrapper">
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tipo de Cambio</th>
+          <th>Nombre</th>
+          <th>ID Elemento</th>
+          <th>Existencias</th>
+          <th>Anterior Modificación</th>
+          <th>Última Modificación</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (register of this.MovementsList(); track $index) {
+          <tr>
+            <!-- ID -->
+            <td>{{ register.id }}</td>
+
+            <!-- TIPO -->
+            @if (register.type === 'DELETE') {
+              <td>
+                <span class="badge badge-eliminar">{{ register.type }}</span>
+              </td>
+            } @else if (register.type === 'UPDATE') {
+              <td>
+                <span class="badge badge-editar">{{ register.type }}</span>
+              </td>
+            } @else {
+              <td>
+                <span class="badge badge-crear">{{ register.type }}</span>
+              </td>
+            }
+            <!-- NOMBRE -->
+            <td>{{ register.name }}</td>
+
+            <!-- ID ELEMENTO -->
+            @if (register.elementId !== null) {
+              <td>{{ register.elementId }}</td>
+            } @else {
+              <td>{{ '-' }}</td>
+            }
+
+            <!-- EXISTENCIAS -->
+            @if (register.quantity !== null) {
+              <td>{{ register.quantity }}</td>
+            } @else {
+              <td>{{ '-' }}</td>
+            }
+
+            <!-- ANTERIOR MODIFICACION -->
+            @if (register.lastModification !== null) {
+              <!-- <td>{{ register.lastModification }}</td> -->
+              <td>{{ getNewDate(register.lastModification) }}</td>
+            } @else {
+              <td>{{ '-' }}</td>
+            }
+            <!-- <td>{{ register.lastModification }}</td> -->
+
+            <!-- ULTIMA MODIFICACION -->
+            <!-- <td>{{ register.newModification }}</td> -->
+            <td>{{ getNewDate(register.newModification) }}</td>
+
+            <!-- DESCRIPCION -->
+            <td>{{ register.description }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
