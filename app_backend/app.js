@@ -656,64 +656,6 @@ app.delete("/elements/:id", async (req, res) => {
   }
 });
 
-// eliminar de existencias elemento existente
-// app.put("/elementsDelete/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const { quantity } = req.body;
-
-//   try {
-//     const today = new Date().toISOString().split("T")[0];
-
-//     if (!id || Number(id) <= 0) {
-//       return res.status(404).json({ message: "error en el id" });
-//     }
-
-//     if (!quantity || Number(quantity) <= 0) {
-//       return res.status(404).json({ message: "error en la cantidad" });
-//     }
-
-//     const [rows] = await mysql.execute(
-//       `
-//         UPDATE Element SET quantity = ? WHERE id = ?
-//       `,
-//       [quantity, id],
-//     );
-
-//     // verificamos que se haya modificado algo
-//     if (rows.affectedRows !== 0) {
-//       // obtenemos la fecha a la insercion inicial o la ultima vez que se agrego un elemento a la existencia
-//       const [lastMove] = await mysql.execute(
-//         `SELECT newModification FROM Movements WHERE elementId = ? ORDER BY newModification DESC LIMIT 1`,
-//         [id],
-//       );
-//       // nos aseguramos que haya encontrado algo, si no (caso extraño), retornara nulo
-//       const lastModification =
-//         lastMove.length > 0 ? lastMove[0].newModification : null;
-
-//       await mysql.execute(
-//         `
-//         INSERT INTO Movements (Type, lastModification, newModification, elementId)
-//         VALUES ('DELETE',?,?,?)
-//         `,
-//         [lastModification, today, id],
-//       );
-
-//       return res
-//         .status(200)
-//         .json({ message: "Elemento(s) agregado correctamente" });
-//     } else {
-//       return res.status(404).json({
-//         message:
-//           "El 'id' ingresado no pertenece a ningun elemento en base de datos",
-//       });
-//     }
-//   } catch (error) {
-//     return res
-//       .status(500)
-//       .json({ message: "error al intentar agregar elemento" });
-//   }
-// });
-
 // retorna todos los movimientos
 app.get("/moveAll", async (req, res) => {
   try {
